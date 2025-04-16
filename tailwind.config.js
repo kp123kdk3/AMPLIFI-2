@@ -15,6 +15,9 @@ module.exports = {
           foreground: 'hsl(var(--primary-foreground))',
         },
       },
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+      },
     },
   },
   plugins: [],
