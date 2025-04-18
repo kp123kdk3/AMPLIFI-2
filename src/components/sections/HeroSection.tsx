@@ -1,211 +1,112 @@
 'use client'
 
-import { useTypewriter, Cursor } from 'react-simple-typewriter'
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { Rocket, Brain, Gauge, Users } from 'lucide-react'
 import Link from 'next/link'
-import { BrainCircuit, Sparkles, Network, Workflow } from 'lucide-react'
-import { useEffect } from 'react'
 
-const IconCard = ({ 
-  icon: Icon, 
-  label, 
-  color, 
-  delay 
-}: { 
-  icon: any, 
-  label: string, 
-  color: string,
-  delay: number 
-}) => {
-  const controls = useAnimationControls()
-  
-  useEffect(() => {
-    controls.start({
-      y: [20, 0],
-      opacity: 1,
-      transition: { 
-        duration: 0.6, 
-        delay,
-        opacity: { duration: 0.4 }
-      }
-    })
-  }, [controls, delay])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={controls}
-      whileHover={{ 
-        scale: 1.05,
-        transition: { duration: 0.2 }
-      }}
-      className="group relative flex flex-col items-center gap-3 p-4 sm:p-6 bg-white/80 backdrop-blur-sm rounded-2xl"
-    >
-      {/* Animated gradient border */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-      
-      {/* Card content with continuous animation */}
-      <motion.div
-        className="relative flex flex-col items-center gap-3"
-        animate={{
-          y: [0, -4, 0]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
-      >
-        <div className={`relative p-2 rounded-xl ${color}`}>
-          <Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" strokeWidth={1.5} />
-          {/* Animated pulse effect */}
-          <motion.div
-            className="absolute inset-0 rounded-xl"
-            animate={{
-              boxShadow: [
-                `0 0 0 0px ${color}`,
-                `0 0 0 8px transparent`
-              ],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeOut",
-            }}
-          />
-        </div>
-        <span className="text-xs sm:text-sm font-medium text-gray-600 relative z-10">{label}</span>
-      </motion.div>
-    </motion.div>
-  )
-}
+const stats = [
+  {
+    value: '2-3x',
+    label: 'Faster Implementation',
+    description: 'Accelerate your AI initiatives',
+    icon: Rocket,
+  },
+  {
+    value: '40%',
+    label: 'Cost Savings',
+    description: 'Versus traditional hiring',
+    icon: Brain,
+  },
+  {
+    value: '95%',
+    label: 'Client Satisfaction',
+    description: 'From startups to enterprises',
+    icon: Users,
+  },
+]
 
 export default function HeroSection() {
-  const [text] = useTypewriter({
-    words: ['Amplify Your Business', 'With AI Solutions'],
-    loop: true,
-    delaySpeed: 3000,
-    deleteSpeed: 80,
-    typeSpeed: 100,
-  })
-
-  const iconCards = [
-    { 
-      icon: BrainCircuit, 
-      label: 'AI Intelligence',
-      color: 'text-blue-600 bg-blue-50',
-      delay: 0.2 
-    },
-    { 
-      icon: Network, 
-      label: 'Neural Networks',
-      color: 'text-violet-600 bg-violet-50',
-      delay: 0.4 
-    },
-    { 
-      icon: Workflow, 
-      label: 'Automation',
-      color: 'text-blue-500 bg-blue-50',
-      delay: 0.6 
-    },
-    { 
-      icon: Sparkles, 
-      label: 'Innovation',
-      color: 'text-violet-500 bg-violet-50',
-      delay: 0.8 
-    }
-  ]
-
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center overflow-hidden py-16 px-4 sm:py-24">
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
-          {/* Left Column - Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 text-center md:text-left mt-8 md:mt-0"
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 tracking-tight">
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                {text}
-              </span>
-              <Cursor cursorStyle="_" />
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-gray-500 mt-4 max-w-2xl md:max-w-none px-4 sm:px-0"
+    <div className="relative isolate overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)]" />
+      <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
+      
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-24 pb-20">
+        <div className="mx-auto max-w-2xl lg:max-w-none">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              Custom AI consulting to automate, optimize, and innovate your business processes.
-            </motion.p>
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-6">
+                Accelerate Your{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                  Startup Growth
+                </span>
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
+                Access top-tier AI and digital transformation expertise without the overhead of
+                full-time hires. Get matched with consultants who understand your vision.
+              </p>
+            </motion.div>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 sm:mt-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-10 flex items-center justify-center gap-x-6"
             >
               <Link
-                href="#contact"
-                className="group relative inline-flex items-center justify-center py-2.5 sm:py-3 px-5 sm:px-6 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 text-white text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                href="/contact"
+                className="rounded-full bg-blue-600 px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
-                <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 opacity-0 group-hover:opacity-20 transition-opacity blur-lg" />
                 Get Started
               </Link>
+              <Link
+                href="/how-it-works"
+                className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600"
+              >
+                Learn more <span aria-hidden="true">→</span>
+              </Link>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Column - Icon Grid */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="w-full md:w-1/2 max-w-sm sm:max-w-md md:max-w-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
           >
-            <div className="relative w-full aspect-square flex items-center justify-center">
-              {/* Background decoration */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-violet-50/50 rounded-3xl"
-                animate={{
-                  backgroundPosition: ['0% 0%', '100% 100%'],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "linear",
-                }}
-              />
-              
-              {/* Icon grid */}
-              <div className="relative grid grid-cols-2 gap-3 sm:gap-6 md:gap-8 p-4 sm:p-6 md:p-8 w-full">
-                {iconCards.map((card, index) => (
-                  <IconCard key={card.label} {...card} />
-                ))}
-              </div>
-            </div>
+            {stats.map((stat) => {
+              const IconComponent = stat.icon
+              return (
+                <motion.div
+                  key={stat.label}
+                  className="flex flex-col items-center gap-4 rounded-3xl bg-white/60 px-8 py-10 backdrop-blur-sm ring-1 ring-gray-100 hover:ring-blue-100 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="rounded-2xl bg-blue-50 p-4">
+                    <IconComponent className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold tracking-tight text-blue-600">
+                      {stat.value}
+                    </div>
+                    <div className="mt-1 text-base font-semibold text-gray-900">
+                      {stat.label}
+                    </div>
+                    <div className="mt-2 text-sm text-gray-600">
+                      {stat.description}
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   )
 } 
